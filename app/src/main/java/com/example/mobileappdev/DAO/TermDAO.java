@@ -4,9 +4,12 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
+import androidx.room.Query;
 import androidx.room.Update;
 
 import com.example.mobileappdev.Entity.Term;
+
+import java.util.List;
 
 @Dao
 public interface TermDAO {
@@ -19,7 +22,8 @@ public interface TermDAO {
     @Delete
     void delete(Term term);
 
-    @Query("SELECT FROM courses ORDER BY courseID ASC")
-    List<>
+    @Query("SELECT * FROM terms ORDER BY courseID ASC")
+    List<Term> getAllTerms();
+
 
 }

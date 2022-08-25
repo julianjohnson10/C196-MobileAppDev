@@ -1,4 +1,4 @@
-package com.example.mobileappdev;
+package android.julian.mobileappdev;
 
 import org.junit.Test;
 

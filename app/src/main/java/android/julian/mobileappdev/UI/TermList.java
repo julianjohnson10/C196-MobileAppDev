@@ -1,9 +1,9 @@
-package com.example.mobileappdev.UI;
+package android.julian.mobileappdev.UI;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.example.mobileappdev.R;
+import android.julian.mobileappdev.R;
 
 public class TermList extends AppCompatActivity {
 

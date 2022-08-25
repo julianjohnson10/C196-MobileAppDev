@@ -1,4 +1,4 @@
-package com.example.mobileappdev.Entity;
+package android.julian.mobileappdev.Entity;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -11,14 +11,14 @@ public class Course {
     private int courseID;
 
     private String courseName;
-    private LocalDate startDate;
-    private LocalDate endDate;
+    private String startDate;
+    private String endDate;
     private String status;
     private String instructorName;
     private String instructorPhone;
     private String instructorEmail;
 
-    public Course(int courseID, String courseName, LocalDate startDate, LocalDate endDate, String status, String instructorName, String instructorPhone, String instructorEmail) {
+    public Course(int courseID, String courseName, String startDate, String endDate, String status, String instructorName, String instructorPhone, String instructorEmail) {
         this.courseID = courseID;
         this.courseName = courseName;
         this.startDate = startDate;
@@ -59,19 +59,19 @@ public class Course {
         this.courseName = courseName;
     }
 
-    public LocalDate getStartDate() {
+    public String getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(LocalDate startDate) {
+    public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
 
-    public LocalDate getEndDate() {
+    public String getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(LocalDate endDate) {
+    public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
 

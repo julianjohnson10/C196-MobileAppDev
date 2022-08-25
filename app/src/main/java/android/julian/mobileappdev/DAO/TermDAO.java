@@ -1,4 +1,4 @@
-package com.example.mobileappdev.DAO;
+package android.julian.mobileappdev.DAO;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
@@ -7,7 +7,7 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.example.mobileappdev.Entity.Term;
+import android.julian.mobileappdev.Entity.Term;
 
 import java.util.List;
 
@@ -22,7 +22,7 @@ public interface TermDAO {
     @Delete
     void delete(Term term);
 
-    @Query("SELECT * FROM terms ORDER BY courseID ASC")
+    @Query("SELECT * FROM terms ORDER BY termID ASC")
     List<Term> getAllTerms();
 
 

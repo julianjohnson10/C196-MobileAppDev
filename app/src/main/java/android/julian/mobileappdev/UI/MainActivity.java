@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this, TermList.class);
         startActivity(intent);
         Repository repo=new Repository(getApplication());
-        Term term = new Term(1, "Fall Term","8-26-2022","9-26-2022");
+        Term term = new Term(1,"Fall Term","8-26-2022","9-26-2022");
         repo.insert(term);
     }
 }

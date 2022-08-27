@@ -48,4 +48,27 @@ public class Repository {
             e.printStackTrace();
         }
     }
+
+    public void update(Term term){
+        dbExecutor.execute(()->{
+            mTermDAO.update(term);
+        });
+        try{
+            Thread.sleep(1000);
+        } catch (InterruptedException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void delete(Term term){
+        dbExecutor.execute(()->{
+            mTermDAO.delete(term);
+        });
+        try{
+            Thread.sleep(1000);
+        } catch (InterruptedException e){
+            e.printStackTrace();
+        }
+    }
+
 }

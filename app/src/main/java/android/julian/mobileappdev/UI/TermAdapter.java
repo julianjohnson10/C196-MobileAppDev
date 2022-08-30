@@ -20,34 +20,33 @@ public class TermAdapter extends RecyclerView.Adapter<TermAdapter.TermViewHolder
         this.context = context;
         this.mTerms = mTerms;
     }
-//    class TermViewHolder extends RecyclerView.ViewHolder{
-//        private final TextView termItemView;
-//
-//        private TermViewHolder(View itemView){
-//            super(itemView);
-//            termItemView=itemView.findViewById(R.id.textView);
-//            itemView.setOnClickListener(view -> {
-//                int pos=getAdapterPosition();
-//                final Term current=mTerms.get(pos);
-//                Intent intent=new Intent(context,CourseList.class);
-//                intent.putExtra("id", current.getTermID());
-//                intent.putExtra("name", current.getTermName());
-//                intent.putExtra("start",current.getStartDate());
-//                intent.putExtra("end",current.getEndDate());
-//                context.startActivity(intent);
-//            });
-//        }
-//    }
+
 public static class TermViewHolder extends RecyclerView.ViewHolder{
 
     TextView termName;
     CardView cardView;
-    
 
     public TermViewHolder(@NonNull View itemView) {
         super(itemView);
+        cardView = (CardView) itemView.findViewById(R.id.cardView);
 
         termName = itemView.findViewById(R.id.termName);
+
+        cardView.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                int pos=getAdapterPosition();
+                final Term current=mTerms.get(pos);
+                Intent intent=new Intent(context,CourseList.class);
+                intent.putExtra("id", current.getTermID());
+                intent.putExtra("name", current.getTermName());
+                intent.putExtra("start",current.getStartDate());
+                intent.putExtra("end",current.getEndDate());
+                context.startActivity(intent);
+            }
+        });
+
     }
 
 }
@@ -73,6 +72,7 @@ public static class TermViewHolder extends RecyclerView.ViewHolder{
         else{
             holder.termName.setText("No terms");
         }
+        holder.cardView.setTag(position);
     }
 
     public void setTerms(ArrayList<Term> terms){

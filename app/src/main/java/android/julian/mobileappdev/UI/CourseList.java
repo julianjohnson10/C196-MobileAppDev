@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.julian.mobileappdev.Database.Repository;
+import android.julian.mobileappdev.Entity.Course;
 import android.julian.mobileappdev.Entity.Term;
 import android.julian.mobileappdev.R;
 import android.os.Bundle;
@@ -50,4 +51,10 @@ public class CourseList extends AppCompatActivity {
         Intent intent = new Intent(CourseList.this, TermList.class);
         startActivity(intent);
     }
+
+    public void gotoTermDetails(View view){
+        Intent intent = new Intent(CourseList.this, CourseDetail.class);
+        startActivity(intent);
+    }
+
 }

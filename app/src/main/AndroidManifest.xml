@@ -9,27 +9,32 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MobileAppDev">
+        <receiver
+            android:name=".UI.Receiver"
+            android:enabled="true"
+            android:exported="true"></receiver>
+
         <activity
             android:name=".UI.AssessmentDetail"
-            android:label="Assessment Details"
-            android:exported="false" />
+            android:exported="false"
+            android:label="Assessment Details" />
         <activity
             android:name=".UI.TermDetail"
-            android:label="Term Details"
-            android:exported="false" />
+            android:exported="false"
+            android:label="Term Details" />
         <activity
             android:name=".UI.CourseDetail"
-            android:label="Course Details"
-            android:exported="false" />
+            android:exported="false"
+            android:label="Course Details" />
         <activity
             android:name=".UI.AssessmentList"
-            android:label="Assessment List"
-            android:exported="false" />
+            android:exported="false"
+            android:label="Assessment List" />
         <activity
             android:name=".UI.CourseList"
-            android:parentActivityName=".UI.TermList"
+            android:exported="false"
             android:label="Course List"
-            android:exported="false" />
+            android:parentActivityName=".UI.TermList" />
         <activity
             android:name=".UI.TermList"
             android:exported="false"

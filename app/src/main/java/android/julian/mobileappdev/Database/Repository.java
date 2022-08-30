@@ -6,6 +6,7 @@ import android.julian.mobileappdev.DAO.TermDAO;
 import android.julian.mobileappdev.Entity.Course;
 import android.julian.mobileappdev.Entity.Term;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -25,7 +26,7 @@ public class Repository {
         mTermDAO=db.termDAO();
     }
 
-    public List<Term>getAllTerms(){
+    public ArrayList<Term>getAllTerms(){
         dbExecutor.execute(()->{
             mAllTerms=mTermDAO.getAllTerms();
         });
@@ -35,7 +36,7 @@ public class Repository {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        return mAllTerms;
+        return (ArrayList<Term>) mAllTerms;
     }
 
     public void insert(Term term) {

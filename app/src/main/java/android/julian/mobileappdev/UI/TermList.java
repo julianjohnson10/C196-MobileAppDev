@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TermList extends AppCompatActivity {
@@ -25,8 +26,8 @@ public class TermList extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         RecyclerView recyclerView=findViewById(R.id.recyclerView);
         Repository repository=new Repository(getApplication());
-        List<Term> terms= repository.getAllTerms();
-        final TermAdapter termAdapter=new TermAdapter(this);
+        ArrayList<Term> terms= repository.getAllTerms();
+        final TermAdapter termAdapter=new TermAdapter(this, terms);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(termAdapter);
         termAdapter.setTerms(terms);

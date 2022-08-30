@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">MobileAppDev</string>
+    <string name="channelName">channel</string>
+    <string name="channelDesc">channelDesc</string>
 </resources>

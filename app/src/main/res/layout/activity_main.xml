@@ -9,7 +9,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Term Scheduler"
+        android:text="Course Scheduler"
         android:textSize="80px"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -23,7 +23,7 @@
         android:layout_width="423dp"
         android:layout_height="70dp"
         android:layout_marginBottom="84dp"
-        android:onClick="enterMenu"
+        android:onClick="enterApp"
         android:text="Enter App"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"

@@ -38,7 +38,7 @@ public static class TermViewHolder extends RecyclerView.ViewHolder{
             public void onClick(View view) {
                 int pos=getAdapterPosition();
                 final Term current=mTerms.get(pos);
-                Intent intent=new Intent(context,CourseList.class);
+                Intent intent=new Intent(context,TermDetail.class);
                 intent.putExtra("id", current.getTermID());
                 intent.putExtra("name", current.getTermName());
                 intent.putExtra("start",current.getStartDate());
@@ -58,7 +58,7 @@ public static class TermViewHolder extends RecyclerView.ViewHolder{
     @Override
     public TermAdapter.TermViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater mInflater = LayoutInflater.from(context);
-        View view = mInflater.inflate(R.layout.term_list_item2, parent, false);
+        View view = mInflater.inflate(R.layout.term_list_item, parent, false);
         return new TermViewHolder(view);
     }
 

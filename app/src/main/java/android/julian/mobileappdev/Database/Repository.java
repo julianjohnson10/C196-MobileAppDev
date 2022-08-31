@@ -39,7 +39,20 @@ public class Repository {
         return (ArrayList<Term>) mAllTerms;
     }
 
-    public void insert(Term term) {
+    public ArrayList<Course>getAllCourses(){
+        dbExecutor.execute(()->{
+            mAllCourses=mCourseDAO.getAllCourses();
+        });
+
+        try{
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return (ArrayList<Course>) mAllCourses;
+    }
+
+    public void insertTerm(Term term) {
         dbExecutor.execute(() -> {
             mTermDAO.insert(term);
         });
@@ -50,7 +63,18 @@ public class Repository {
         }
     }
 
-    public void update(Term term){
+    public void insertCourse(Course course) {
+        dbExecutor.execute(() -> {
+            mCourseDAO.insert(course);
+        });
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateTerm(Term term){
         dbExecutor.execute(()->{
             mTermDAO.update(term);
         });
@@ -61,9 +85,31 @@ public class Repository {
         }
     }
 
-    public void delete(Term term){
+    public void updateCourse(Course course){
+        dbExecutor.execute(()->{
+            mCourseDAO.update(course);
+        });
+        try{
+            Thread.sleep(1000);
+        } catch (InterruptedException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteTerm(Term term){
         dbExecutor.execute(()->{
             mTermDAO.delete(term);
+        });
+        try{
+            Thread.sleep(1000);
+        } catch (InterruptedException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteCourse(Course course){
+        dbExecutor.execute(()->{
+            mCourseDAO.delete(course);
         });
         try{
             Thread.sleep(1000);

@@ -9,6 +9,7 @@ import androidx.room.Update;
 
 import android.julian.mobileappdev.Entity.Term;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Dao
@@ -24,6 +25,5 @@ public interface TermDAO {
 
     @Query("SELECT * FROM terms ORDER BY termID ASC")
     List<Term> getAllTerms();
-
 
 }

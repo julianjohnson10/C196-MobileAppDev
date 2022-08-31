@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.julian.mobileappdev.Database.Repository;
+import android.julian.mobileappdev.Entity.Course;
 import android.julian.mobileappdev.Entity.Term;
 import android.os.Bundle;
 import android.view.View;
@@ -20,11 +21,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    public void enterMenu(View view) {
+    public void enterApp(View view) {
         Intent intent = new Intent(MainActivity.this, TermList.class);
         startActivity(intent);
         Repository repo=new Repository(getApplication());
         Term term = new Term(1,"Fall Term","8-26-2022","9-26-2022");
-        repo.insert(term);
+        repo.insertTerm(term);
+        Course c = new Course(1,"test","test", "test", "test", "test","test","test");
+        repo.insertCourse(c);
     }
 }

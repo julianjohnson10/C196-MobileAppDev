@@ -7,6 +7,7 @@ import android.julian.mobileappdev.R;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -26,6 +27,8 @@ public static class TermViewHolder extends RecyclerView.ViewHolder{
     TextView termName;
     CardView cardView;
 
+
+
     public TermViewHolder(@NonNull View itemView) {
         super(itemView);
         cardView = (CardView) itemView.findViewById(R.id.cardView);
@@ -38,11 +41,12 @@ public static class TermViewHolder extends RecyclerView.ViewHolder{
             public void onClick(View view) {
                 int pos=getAdapterPosition();
                 final Term current=mTerms.get(pos);
-                Intent intent=new Intent(context,TermDetail.class);
-                intent.putExtra("id", current.getTermID());
-                intent.putExtra("name", current.getTermName());
-                intent.putExtra("start",current.getStartDate());
-                intent.putExtra("end",current.getEndDate());
+                Intent intent=new Intent(context, TermDetails.class);
+                intent.putExtra("term_id", current.getTermID());
+                intent.putExtra("term_name", current.getTermName());
+                intent.putExtra("term_start",current.getStartDate());
+                intent.putExtra("term_end",current.getEndDate());
+
                 context.startActivity(intent);
             }
         });

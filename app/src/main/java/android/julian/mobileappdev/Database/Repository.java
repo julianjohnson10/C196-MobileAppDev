@@ -12,12 +12,12 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class Repository {
-    private TermDAO mTermDAO;
-    private CourseDAO mCourseDAO;
+    private final TermDAO mTermDAO;
+    private final CourseDAO mCourseDAO;
     private List<Term> mAllTerms;
     private List<Course> mAllCourses;
 
-    private static int THREADS=4;
+    private static final int THREADS=4;
     static final ExecutorService dbExecutor= Executors.newFixedThreadPool(THREADS);
 
     public Repository(Application application){

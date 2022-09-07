@@ -5,39 +5,42 @@ import androidx.room.PrimaryKey;
 
 @Entity(tableName = "courses")
 public class Course {
+
     @PrimaryKey(autoGenerate = true)
     private int courseID;
-
-    private String courseName;
+    private String courseTitle;
     private String startDate;
     private String endDate;
     private String status;
     private String instructorName;
     private String instructorPhone;
     private String instructorEmail;
+    private int termID;
 
-    public Course(int courseID, String courseName, String startDate, String endDate, String status, String instructorName, String instructorPhone, String instructorEmail) {
+    public Course(int courseID, String courseTitle, String startDate, String endDate, String status, String instructorName, String instructorPhone, String instructorEmail, int termID) {
         this.courseID = courseID;
-        this.courseName = courseName;
+        this.courseTitle = courseTitle;
         this.startDate = startDate;
         this.endDate = endDate;
         this.status = status;
         this.instructorName = instructorName;
         this.instructorPhone = instructorPhone;
         this.instructorEmail = instructorEmail;
+        this.termID = termID;
     }
 
     @Override
     public String toString() {
         return "Course{" +
                 "courseID=" + courseID +
-                ", courseName='" + courseName + '\'' +
-                ", startDate=" + startDate +
-                ", endDate=" + endDate +
+                ", courseTitle='" + courseTitle + '\'' +
+                ", startDate='" + startDate + '\'' +
+                ", endDate='" + endDate + '\'' +
                 ", status='" + status + '\'' +
                 ", instructorName='" + instructorName + '\'' +
                 ", instructorPhone='" + instructorPhone + '\'' +
                 ", instructorEmail='" + instructorEmail + '\'' +
+                ", termID=" + termID +
                 '}';
     }
 
@@ -49,12 +52,12 @@ public class Course {
         this.courseID = courseID;
     }
 
-    public String getCourseName() {
-        return courseName;
+    public String getCourseTitle() {
+        return courseTitle;
     }
 
-    public void setCourseName(String courseName) {
-        this.courseName = courseName;
+    public void setCourseTitle(String courseTitle) {
+        this.courseTitle = courseTitle;
     }
 
     public String getStartDate() {
@@ -103,5 +106,13 @@ public class Course {
 
     public void setInstructorEmail(String instructorEmail) {
         this.instructorEmail = instructorEmail;
+    }
+
+    public int getTermID() {
+        return termID;
+    }
+
+    public void setTermID(int termID) {
+        this.termID = termID;
     }
 }

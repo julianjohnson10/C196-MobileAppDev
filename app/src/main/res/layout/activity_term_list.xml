@@ -23,7 +23,7 @@
         app:srcCompat="@drawable/ic_baseline_add_24" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+        android:id="@+id/termRV"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingLeft="10dp"
@@ -32,6 +32,15 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
 
+        />
+    <TextView
+        android:id="@+id/empty_view_terms"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:visibility="gone"
+        android:text="@string/no_terms"
+        app:layout_constraintLeft_toLeftOf="parent"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

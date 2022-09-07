@@ -1,12 +1,8 @@
 package android.julian.mobileappdev.UI;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.julian.mobileappdev.Database.Repository;
-import android.julian.mobileappdev.Entity.Course;
 import android.julian.mobileappdev.Entity.Term;
 import android.julian.mobileappdev.R;
 import android.os.Bundle;
@@ -14,60 +10,57 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-
 import java.util.ArrayList;
 
 public class AddTerm extends AppCompatActivity {
-    EditText editTermName;
-    EditText editStartDate;
-    EditText editEndDate;
+    EditText addTermName;
+    EditText addTermStart;
+    EditText addTermEnd;
     String termName;
-    String startDate;
-    String endDate;
+    String termStart;
+    String termEnd;
     int termID;
-    Repository repo;
+    Repository repository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_term);
-        editTermName=findViewById(R.id.editTermName);
-        editStartDate=findViewById(R.id.editStartDate);
-        editEndDate=findViewById(R.id.editEndDate);
-        termID = getIntent().getIntExtra("id", -1);
-        termName=getIntent().getStringExtra("name");
-        startDate=getIntent().getStringExtra("start");
-        endDate=getIntent().getStringExtra("end");
-        editTermName.setText(termName);
-        editStartDate.setText(startDate);
-        editEndDate.setText(endDate);
+        addTermName =findViewById(R.id.addTermName);
+        addTermStart=findViewById(R.id.addTermStart);
+        addTermEnd =findViewById(R.id.addTermEnd);
+        termID = getIntent().getIntExtra("term_id", -1);
+        termName = getIntent().getStringExtra("term_name");
+        termStart = getIntent().getStringExtra("term_start");
+        termEnd = getIntent().getStringExtra("term_end");
+//        addTermName.setText(termName);
+//        addTermStart.setText(termStart);
+//        addTermEnd.setText(termEnd);
 
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        RecyclerView recyclerView=findViewById(R.id.recyclerView2);
-        Repository repository=new Repository(getApplication());
-        ArrayList<Course> courses = repository.getAllCourses();
-        final CourseAdapter courseAdapter=new CourseAdapter(this, courses);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(courseAdapter);
-        courseAdapter.setCourses(courses);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        repository = new Repository(getApplication());
+        ArrayList<Term> terms = repository.getAllTerms();
+        final TermAdapter termAdapter=new TermAdapter(this, terms);
+        termAdapter.setTerms(terms);
+
     }
 
-    public void saveTerm(View view) {
+    public void addTerm(View view) {
         Term t;
         if (termID == -1) {
-            int id = repo.getAllTerms().get(repo.getAllTerms().size() -1).getTermID() + 1;
-            t = new Term(id, editTermName.getText().toString(), editStartDate.getText().toString(), editEndDate.getText().toString());
-            repo.insertTerm(t);
+            int id = repository.getAllTerms().get(repository.getAllTerms().size() -1).getTermID() + 1;
+            t = new Term(id, addTermName.getText().toString(), addTermStart.getText().toString(), addTermEnd.getText().toString());
+            repository.insertTerm(t);
         } else {
-            t = new Term(termID, editTermName.getText().toString(), editStartDate.getText().toString(), editEndDate.getText().toString());
-            repo.updateTerm(t);
+            t = new Term(termID, addTermName.getText().toString(), addTermStart.getText().toString(), addTermEnd.getText().toString());
+            repository.updateTerm(t);
         }
         Intent intent = new Intent(AddTerm.this, TermList.class);
         startActivity(intent);
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_courselist, menu);
+        getMenuInflater().inflate(R.menu.menu_termlist, menu);
         return true;
     }
 
@@ -80,9 +73,5 @@ public class AddTerm extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void gotoTermDetails(View view){
-        Intent intent = new Intent(AddTerm.this, CourseDetail.class);
-        startActivity(intent);
-    }
 
 }

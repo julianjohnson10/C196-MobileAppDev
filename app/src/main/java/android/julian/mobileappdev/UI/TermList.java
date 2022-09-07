@@ -13,6 +13,7 @@ import android.julian.mobileappdev.R;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -23,7 +24,9 @@ public class TermList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_term_list);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        RecyclerView recyclerView=findViewById(R.id.recyclerView);
+        RecyclerView recyclerView=findViewById(R.id.termRV);
+        TextView emptyView = findViewById(R.id.empty_view_terms);
+
         Repository repository=new Repository(getApplication());
         ArrayList<Term> terms= repository.getAllTerms();
         final TermAdapter termAdapter=new TermAdapter(this, terms);
@@ -31,6 +34,14 @@ public class TermList extends AppCompatActivity {
         recyclerView.setAdapter(termAdapter);
         termAdapter.setTerms(terms);
 
+        if (terms.isEmpty()) {
+            recyclerView.setVisibility(View.GONE);
+            emptyView.setVisibility(View.VISIBLE);
+        }
+        else {
+            recyclerView.setVisibility(View.VISIBLE);
+            emptyView.setVisibility(View.GONE);
+        }
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -45,11 +56,6 @@ public class TermList extends AppCompatActivity {
                 return true;
         }
             return super.onOptionsItemSelected(item);
-    }
-
-    public void gotoCourseList(View view) {
-        Intent intent = new Intent(TermList.this, TermDetail.class);
-        startActivity(intent);
     }
 
     public void gotoAddTerm(View view) {

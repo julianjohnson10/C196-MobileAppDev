@@ -25,25 +25,30 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
 
 public static  class CourseViewHolder extends RecyclerView.ViewHolder{
     TextView courseName;
-    CardView cardView2;
+    CardView cardView;
 
     public CourseViewHolder(@NonNull View itemView) {
         super(itemView);
-        cardView2 = (CardView) itemView.findViewById(R.id.cardView2);
+        cardView = (CardView) itemView.findViewById(R.id.cardView2);
 
         courseName = (TextView) itemView.findViewById(R.id.courseName);
 
-        cardView2.setOnClickListener(new View.OnClickListener() {
+        cardView.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
                 int pos=getAdapterPosition();
                 final Course current=mCourses.get(pos);
-                Intent intent=new Intent(context,TermDetail.class);
-                intent.putExtra("id", current.getCourseID());
-                intent.putExtra("name", current.getCourseName());
-//                intent.putExtra("start",current.getStartDate());
-//                intent.putExtra("end",current.getEndDate());
+                Intent intent=new Intent(context, CourseDetail.class);
+                intent.putExtra("course_id", current.getCourseID());
+                intent.putExtra("course_title", current.getCourseTitle());
+                intent.putExtra("course_start",current.getStartDate());
+                intent.putExtra("course_end",current.getEndDate());
+//                intent.putExtra("course_status", current.getStatus());
+//                intent.putExtra("course_instructor_name", current.getInstructorName());
+//                intent.putExtra("course_instructor_phone", current.getInstructorPhone());
+//                intent.putExtra("course_instructor_email", current.getInstructorEmail());
+
                 context.startActivity(intent);
             }
         });
@@ -62,13 +67,13 @@ public static  class CourseViewHolder extends RecyclerView.ViewHolder{
     public void onBindViewHolder(@NonNull CourseAdapter.CourseViewHolder holder, int position) {
         if(mCourses!=null){
             Course current=mCourses.get(position);
-            String name=current.getCourseName();
+            String name=current.getCourseTitle();
             holder.courseName.setText(name);
         }
         else{
             holder.courseName.setText("No courses");
         }
-        holder.cardView2.setTag(position);
+        holder.cardView.setTag(position);
     }
 
     public void setCourses(ArrayList<Course> courses){

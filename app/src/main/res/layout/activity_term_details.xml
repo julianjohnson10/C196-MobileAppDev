@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UI.AddTerm">
+    tools:context=".UI.TermDetails">
 
     <ScrollView
         android:layout_width="409dp"
@@ -15,21 +15,23 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Term Name: "/>
 
                 <EditText
-                    android:id="@+id/addTermName"
+                    android:id="@+id/editTermName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="Fall Term" />
+                    android:hint="Fall Term"/>
 
             </LinearLayout>
 
@@ -37,31 +39,36 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Start Date: "/>
+                    android:text="Start Date: "></TextView>
+
                 <EditText
-                    android:id="@+id/addTermStart"
+                    android:id="@+id/editStartDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="MM-DD-YYYY" />
+                    android:hint="MM-DD-YYYY"></EditText>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="End Date: "></TextView>
+
                 <EditText
-                    android:id="@+id/addTermEnd"
+                    android:id="@+id/editEndDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:hint="MM-DD-YYYY"></EditText>
             </LinearLayout>
+
 
         </LinearLayout>
 
@@ -72,12 +79,24 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="248dp"
+        android:layout_marginLeft="256dp"
+        android:clickable="true"
+        android:onClick="saveTerm"
+        android:text="Save Term"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/button2"></Button>
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="36dp"
         android:layout_marginTop="152dp"
         android:clickable="true"
-        android:onClick="addTerm"
-        android:text="Add Term"
+        android:onClick="gotoCourseList"
+        android:text="Go to courses list"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,7 +2,6 @@ package android.julian.mobileappdev.UI;
 
 import android.content.Intent;
 import android.julian.mobileappdev.Database.Repository;
-import android.julian.mobileappdev.Entity.Assessment;
 import android.julian.mobileappdev.Entity.Course;
 import android.julian.mobileappdev.R;
 import android.os.Bundle;
@@ -15,19 +14,22 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.w3c.dom.Text;
 
-public class AssessmentList extends AppCompatActivity {
+import java.util.ArrayList;
+
+public class CourseList extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_assessment_list);
+        setContentView(R.layout.activity_course_list);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        RecyclerView recyclerView=findViewById(R.id.assessmentRV);
-        TextView emptyView = findViewById(R.id.empty_view_assessment);
+        RecyclerView recyclerView=findViewById(R.id.courseRV);
+        TextView emptyView = findViewById(R.id.empty_view);
 
         Repository repository=new Repository(getApplication());
-        ArrayList<Assessment> assessments= repository.get();
+        ArrayList<Course> courses= repository.getAllCourses();
         final CourseAdapter courseAdapter=new CourseAdapter(this, courses);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(courseAdapter);

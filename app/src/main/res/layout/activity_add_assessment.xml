@@ -4,22 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UI.AssessmentDetail">
+    tools:context=".UI.AddAssessment">
 
     <ScrollView
-        android:layout_width="409dp"
+        android:layout_width="match_parent"
         android:layout_height="100dp"
         tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="1dp"
-        android:paddingLeft="10dp"
-        >
-
+        tools:layout_editor_absoluteY="1dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
+            android:orientation="vertical" >
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -28,85 +24,60 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Assessment Title: "></TextView>
+                    android:text="Assessment Title: " />
 
                 <EditText
-                    android:id="@+id/editAssessmentTitle"
+                    android:id="@+id/addAssessmentTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="C196 Performance Assessment"/>
+                    android:hint="                    " />
 
             </LinearLayout>
-
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Assessment Type: "/>
 
                 <Spinner
-                    android:id="@+id/editAssessmentType"
+                    android:id="@+id/addAssessmentType"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
 
             </LinearLayout>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Assessment Date: "></TextView>
-
+                    android:text="Assessment End Date: "/>
                 <EditText
-                    android:id="@+id/editAssessmentEnd"
+                    android:id="@+id/addAssessmentEnd"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="MM-DD-YYYY"></EditText>
+                    android:hint="MM-DD-YYYY"/>
             </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Assessment Course ID: "></TextView>
-
-                <TextView
-                    android:id="@+id/editAssessmentCourseID"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    />
-            </LinearLayout>
-
 
         </LinearLayout>
 
 
     </ScrollView>
 
-
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="272dp"
-        android:layout_marginTop="124dp"
+        android:layout_marginLeft="212dp"
+        android:layout_marginTop="148dp"
         android:clickable="true"
-        android:onClick="saveAssessment"
-        android:text="Save"
+        android:onClick="addAssessment"
+        android:text="Add Assessment"
+        android:textColor="#263238"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></Button>
-
-
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

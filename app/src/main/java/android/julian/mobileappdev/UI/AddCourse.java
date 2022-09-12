@@ -23,6 +23,7 @@ public class AddCourse extends AppCompatActivity {
 //    String courseInstName;
 //    String courseInstPhone;
 //    String courseInstEmail;
+    int termID;
     int courseID;
     Repository repo;
 
@@ -34,6 +35,7 @@ public class AddCourse extends AppCompatActivity {
         addCourseStart =findViewById(R.id.addCourseStart);
         addCourseEnd =findViewById(R.id.addCourseEnd);
         courseID = getIntent().getIntExtra("course_id", -1);
+        termID = getIntent().getIntExtra("term_id",-1);
         courseTitle=getIntent().getStringExtra("course_name");
         courseStart=getIntent().getStringExtra("course_start");
         courseEnd=getIntent().getStringExtra("course_end");
@@ -47,7 +49,8 @@ public class AddCourse extends AppCompatActivity {
 //        editCourseStatus.set(courseStatus);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         repo = new Repository(getApplication());
-        ArrayList<Course> courses = repo.getAllCourses();
+        ArrayList<Course> courses;
+        courses = repo.getAllCourses(termID);
         final CourseAdapter courseAdapter=new CourseAdapter(this, courses);
         courseAdapter.setCourses(courses);
     }
@@ -55,19 +58,18 @@ public class AddCourse extends AppCompatActivity {
     public void addCourse(View view) {
         Course c;
         if (courseID == -1) {
-            int id = repo.getAllCourses().get(repo.getAllCourses().size() -1).getCourseID() + 1;
+            int id = repo.getAllCourses(termID).get(repo.getAllCourses(termID).size() -1).getCourseID() + 1;
             c = new Course(id, addCourseTitle.getText().toString(), addCourseStart.getText().toString(), addCourseEnd.getText().toString(), "test","test","test","test",1);
             repo.insertCourse(c);
         } else {
             c = new Course(courseID,  addCourseTitle.getText().toString(), addCourseStart.getText().toString(), addCourseEnd.getText().toString(),"test","test","test","test", 1);
             repo.updateCourse(c);
         }
-        Intent intent = new Intent(AddCourse.this, CourseList.class);
-        startActivity(intent);
+        finish();
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_courselist, menu);
+        getMenuInflater().inflate(R.menu.menu_termlist, menu);
         return true;
     }
 

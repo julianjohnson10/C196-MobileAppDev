@@ -8,9 +8,11 @@
 
     <ScrollView
         android:layout_width="409dp"
-        android:layout_height="100dp"
+        android:layout_height="200dp"
         tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="1dp">
+        tools:layout_editor_absoluteY="1dp"
+        android:paddingLeft="10dp"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -20,7 +22,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                >
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -69,6 +72,73 @@
                     android:hint="MM-DD-YYYY"></EditText>
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Status: "></TextView>
+
+                <Spinner
+                    android:id="@+id/editCourseStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Instructor Name: "></TextView>
+
+                <EditText
+                    android:id="@+id/editInstructorName"
+                    android:layout_width="143dp"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Instructor Phone: "></TextView>
+
+                <EditText
+                    android:id="@+id/editInstructorPhone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="(555)-111-2222"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Instructor Email: "></TextView>
+
+                <EditText
+                    android:id="@+id/editInstructorEmail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="123@instructor.edu" />
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -79,10 +149,10 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="272dp"
+        android:layout_marginLeft="280dp"
         android:clickable="true"
-        android:text="Save"
         android:onClick="saveCourse"
+        android:text="Save"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="@+id/button2"></Button>
 
@@ -90,11 +160,11 @@
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="144dp"
-        android:text="Go to assessments list"
+        android:layout_marginLeft="36dp"
+        android:layout_marginTop="280dp"
         android:clickable="true"
         android:onClick="gotoAssessmentList"
+        android:text="Go to assessments list"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

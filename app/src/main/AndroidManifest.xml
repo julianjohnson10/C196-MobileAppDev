@@ -16,13 +16,17 @@
             android:exported="true" />
 
         <activity
+            android:name=".UI.AssessmentList"
+            android:exported="false"
+            android:label="Assessment List" />
+        <activity
             android:name=".UI.AssessmentDetail"
             android:exported="false"
             android:label="Assessment Details" />
         <activity
-            android:name=".UI.AssessmentList"
+            android:name=".UI.AddAssessment"
             android:exported="false"
-            android:label="Assessment List" />
+            android:label="Add Assessment" />
         <activity
             android:name=".UI.TermList"
             android:exported="false"
@@ -31,16 +35,17 @@
             android:name=".UI.TermDetails"
             android:exported="false"
             android:label="Term Details"
-            android:parentActivityName=".UI.TermList" />
+            />
         <activity
             android:name=".UI.AddTerm"
             android:exported="false"
             android:label="Add Term"
-            android:parentActivityName=".UI.TermList" />
+             />
         <activity
             android:name=".UI.CourseList"
             android:exported="false"
-            android:label="Course List" />
+            android:label="Course List"
+          />
         <activity
             android:name=".UI.CourseDetail"
             android:exported="false"

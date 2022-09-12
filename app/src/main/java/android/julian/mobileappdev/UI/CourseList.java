@@ -14,8 +14,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 
 public class CourseList extends AppCompatActivity {
@@ -29,7 +27,7 @@ public class CourseList extends AppCompatActivity {
         TextView emptyView = findViewById(R.id.empty_view);
 
         Repository repository=new Repository(getApplication());
-        ArrayList<Course> courses= repository.getAllCourses();
+        ArrayList<Course> courses= repository.getAllCourses(TermDetails.termID);
         final CourseAdapter courseAdapter=new CourseAdapter(this, courses);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(courseAdapter);
@@ -41,6 +39,32 @@ public class CourseList extends AppCompatActivity {
             emptyView.setVisibility(View.VISIBLE);
         }
         else {
+            recyclerView.setVisibility(View.VISIBLE);
+            emptyView.setVisibility(View.GONE);
+        }
+
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setContentView(R.layout.activity_course_list);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        RecyclerView recyclerView = findViewById(R.id.courseRV);
+        TextView emptyView = findViewById(R.id.empty_view);
+
+        Repository repository = new Repository(getApplication());
+        ArrayList<Course> courses = repository.getAllCourses(TermDetails.termID);
+        final CourseAdapter courseAdapter = new CourseAdapter(this, courses);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(courseAdapter);
+        courseAdapter.setCourses(courses);
+
+        if (courses.isEmpty()) {
+            recyclerView.setVisibility(View.GONE);
+            emptyView.setVisibility(View.VISIBLE);
+        } else {
             recyclerView.setVisibility(View.VISIBLE);
             emptyView.setVisibility(View.GONE);
         }

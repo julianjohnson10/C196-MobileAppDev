@@ -3,7 +3,6 @@ package android.julian.mobileappdev.UI;
 import android.content.Intent;
 import android.julian.mobileappdev.Database.Repository;
 import android.julian.mobileappdev.Entity.Assessment;
-import android.julian.mobileappdev.Entity.Course;
 import android.julian.mobileappdev.R;
 import android.os.Bundle;
 import android.view.Menu;
@@ -15,26 +14,30 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+
 
 public class AssessmentList extends AppCompatActivity {
+
+    int courseID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_assessment_list);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         RecyclerView recyclerView=findViewById(R.id.assessmentRV);
         TextView emptyView = findViewById(R.id.empty_view_assessment);
-
+        courseID = getIntent().getIntExtra("course_id", -1);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Repository repository=new Repository(getApplication());
-        ArrayList<Assessment> assessments= repository.get();
-        final CourseAdapter courseAdapter=new CourseAdapter(this, courses);
+        ArrayList<Assessment> assessments = repository.getAllAssessments(CourseDetail.courseID);
+        final AssessmentAdapter assessmentAdapter = new AssessmentAdapter(this, assessments);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(courseAdapter);
-        courseAdapter.setCourses(courses);
+        recyclerView.setAdapter(assessmentAdapter);
+        assessmentAdapter.setAssessments(assessments);
 
 
-        if (courses.isEmpty()) {
+        if (assessments.isEmpty()) {
             recyclerView.setVisibility(View.GONE);
             emptyView.setVisibility(View.VISIBLE);
         }
@@ -42,8 +45,32 @@ public class AssessmentList extends AppCompatActivity {
             recyclerView.setVisibility(View.VISIBLE);
             emptyView.setVisibility(View.GONE);
         }
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        setContentView(R.layout.activity_assessment_list);
+        RecyclerView recyclerView=findViewById(R.id.assessmentRV);
+        TextView emptyView = findViewById(R.id.empty_view_assessment);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        courseID = getIntent().getIntExtra("course_id", -1);
+        Repository repository=new Repository(getApplication());
+        ArrayList<Assessment> assessments = repository.getAllAssessments(CourseDetail.courseID);
+        final AssessmentAdapter assessmentAdapter = new AssessmentAdapter(this, assessments);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(assessmentAdapter);
+        assessmentAdapter.setAssessments(assessments);
 
 
+        if (assessments.isEmpty()) {
+            recyclerView.setVisibility(View.GONE);
+            emptyView.setVisibility(View.VISIBLE);
+        }
+        else {
+            recyclerView.setVisibility(View.VISIBLE);
+            emptyView.setVisibility(View.GONE);
+        }
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -60,8 +87,8 @@ public class AssessmentList extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void gotoAddCourse(View view) {
-        Intent i = new Intent(CourseList.this, AddCourse.class);
+    public void gotoAddAssessment(View view) {
+        Intent i = new Intent(AssessmentList.this, AddAssessment.class);
         startActivity(i);
     }
 }

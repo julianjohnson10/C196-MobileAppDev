@@ -1,7 +1,5 @@
 package android.julian.mobileappdev.Entity;
 
-import android.widget.RadioButton;
-
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -14,11 +12,14 @@ public class Assessment {
     private String assessmentTitle;
     private String assessmentEndDate;
 
-    public Assessment(int assessmentID, String assessmentType, String assessmentTitle, String assessmentEndDate) {
+    private int courseID;
+
+    public Assessment(int assessmentID, String assessmentType, String assessmentTitle, String assessmentEndDate, int courseID) {
         this.assessmentID = assessmentID;
         this.assessmentType = assessmentType;
         this.assessmentTitle = assessmentTitle;
         this.assessmentEndDate = assessmentEndDate;
+        this.courseID = courseID;
     }
 
     @Override
@@ -61,6 +62,14 @@ public class Assessment {
 
     public void setAssessmentEndDate(String assessmentEndDate) {
         this.assessmentEndDate = assessmentEndDate;
+    }
+
+    public int getCourseID() {
+        return courseID;
+    }
+
+    public void setCourseID(int courseID) {
+        this.courseID = courseID;
     }
 }
 

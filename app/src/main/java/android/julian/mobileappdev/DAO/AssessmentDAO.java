@@ -1,6 +1,6 @@
 package android.julian.mobileappdev.DAO;
 
-import android.julian.mobileappdev.Entity.Course;
+import android.julian.mobileappdev.Entity.Assessment;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
@@ -12,17 +12,16 @@ import androidx.room.Update;
 import java.util.List;
 
 @Dao
-public interface CourseDAO {
+public interface AssessmentDAO {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    void insert(Course course);
+    void insert(Assessment assessment);
 
     @Update
-    void update(Course course);
+    void update(Assessment assessment);
 
     @Delete
-    void delete(Course course);
+    void delete(Assessment assessment);
 
-
-    @Query("SELECT * FROM courses WHERE termID = :termID")
-    List<Course> getAllCourses(int termID);
+    @Query("SELECT * FROM assessments WHERE courseID = :courseID")
+    List<Assessment> getAllAssessments(int courseID);
 }

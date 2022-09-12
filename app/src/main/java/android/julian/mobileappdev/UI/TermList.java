@@ -44,6 +44,33 @@ public class TermList extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        setContentView(R.layout.activity_term_list);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        RecyclerView recyclerView=findViewById(R.id.termRV);
+        TextView emptyView = findViewById(R.id.empty_view_terms);
+
+        Repository repository=new Repository(getApplication());
+        ArrayList<Term> terms= repository.getAllTerms();
+        final TermAdapter termAdapter=new TermAdapter(this, terms);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(termAdapter);
+        termAdapter.setTerms(terms);
+
+        if (terms.isEmpty()) {
+            recyclerView.setVisibility(View.GONE);
+            emptyView.setVisibility(View.VISIBLE);
+        }
+        else {
+            recyclerView.setVisibility(View.VISIBLE);
+            emptyView.setVisibility(View.GONE);
+        }
+    }
+
+
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_termlist, menu);
         return true;

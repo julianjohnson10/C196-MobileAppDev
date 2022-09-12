@@ -4,12 +4,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.julian.mobileappdev.Database.Repository;
+import android.julian.mobileappdev.Entity.Assessment;
 import android.julian.mobileappdev.Entity.Course;
 import android.julian.mobileappdev.Entity.Term;
 import android.os.Bundle;
 import android.view.View;
 
 import android.julian.mobileappdev.R;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,12 +26,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void enterApp(View view) {
+
         Intent intent = new Intent(MainActivity.this, TermList.class);
         startActivity(intent);
         Repository repo=new Repository(getApplication());
-        Term term = new Term(1,"Fall Term","8-20-2022","2-20-2023");
+        Term term = new Term(1,"Fall Term 2022", "08/10/2022","2/20/2022");
         repo.insertTerm(term);
-        Course c = new Course(1,"Intro to IT","8-20-2022", "9-20-2022", "test", "test","test","test", 1);
+        Course c = new Course(1,"Intro to IT","08/10/2022", "09/20/2022", "In Progress", "Jerry Garcia","(844)-100-2222","jgarcia@school.edu",1);
         repo.insertCourse(c);
+        Assessment a = new Assessment(1,"Performance Assessment","IT Fundamentals Test", "9/20/2022", 1);
+        repo.insertAssessment(a);
     }
 }

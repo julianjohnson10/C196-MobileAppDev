@@ -45,6 +45,7 @@ public static  class CourseViewHolder extends RecyclerView.ViewHolder{
                 intent.putExtra("course_start",current.getStartDate());
                 intent.putExtra("course_end",current.getEndDate());
                 intent.putExtra("course_status", current.getStatus());
+                intent.putExtra("course_notes",current.getCourseNotes());
                 intent.putExtra("course_instructor_name", current.getInstructorName());
                 intent.putExtra("course_instructor_phone", current.getInstructorPhone());
                 intent.putExtra("course_instructor_email", current.getInstructorEmail());

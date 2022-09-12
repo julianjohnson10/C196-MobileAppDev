@@ -1,8 +1,11 @@
 package android.julian.mobileappdev.UI;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.julian.mobileappdev.Database.Repository;
 import android.julian.mobileappdev.Entity.Term;
@@ -12,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -125,14 +129,44 @@ public class TermDetails extends AppCompatActivity {
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_termlist, menu);
+        getMenuInflater().inflate(R.menu.menu_termdetails, menu);
         return true;
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
+        Term term;
         switch (item.getItemId()) {
             case android.R.id.home:
                 this.finish();
+                return true;
+            case R.id.deleteTerm:
+                if(repository.getCoursesFromTerm(termID).isEmpty()){
+                    term = new Term(termID, editTermName.getText().toString(), editStartDate.getText().toString(), editEndDate.getText().toString());
+                    repository.deleteTerm(term);
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(TermDetails.this);
+                    builder.setTitle("Success!");
+                    builder.setMessage(editTermName.getText().toString() + " was successfully deleted!");
+                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                        }
+                    });
+                    builder.show();
+
+                    this.finish();
+                } else {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(TermDetails.this);
+                    builder.setTitle("Error!");
+                    builder.setMessage(editTermName.getText().toString() + " cannot be deleted because it has " +
+                            "courses associated with it.\n\nPlease delete the associated courses first.");
+                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                        }
+                    });
+                    builder.show();
+                }
                 return true;
         }
         return super.onOptionsItemSelected(item);

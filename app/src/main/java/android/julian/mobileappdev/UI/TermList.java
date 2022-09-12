@@ -1,9 +1,11 @@
 package android.julian.mobileappdev.UI;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.julian.mobileappdev.Database.Repository;
 import android.julian.mobileappdev.Entity.Term;
@@ -49,7 +51,7 @@ public class TermList extends AppCompatActivity {
         super.onResume();
 
         setContentView(R.layout.activity_term_list);
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         RecyclerView recyclerView=findViewById(R.id.termRV);
         TextView emptyView = findViewById(R.id.empty_view_terms);
 
@@ -70,9 +72,8 @@ public class TermList extends AppCompatActivity {
         }
     }
 
-
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_termlist, menu);
+        getMenuInflater().inflate(R.menu.baseline, menu);
         return true;
     }
 
@@ -82,9 +83,8 @@ public class TermList extends AppCompatActivity {
                 this.finish();
                 return true;
         }
-            return super.onOptionsItemSelected(item);
+        return super.onOptionsItemSelected(item);
     }
-
     public void gotoAddTerm(View view) {
         Intent i = new Intent(TermList.this, AddTerm.class);
         startActivity(i);

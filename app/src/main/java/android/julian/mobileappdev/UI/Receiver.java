@@ -34,7 +34,7 @@ public class Receiver extends BroadcastReceiver {
         createNotificationChannel(context, channel);
 
         Notification notification = new NotificationCompat.Builder(context,channel)
-                .setSmallIcon((R.drawable.ic_launcher_background))
+                .setSmallIcon((R.drawable.icon))
                 .setContentText(intent.getStringExtra("key"))
                 .setContentTitle("Test").build();
         NotificationManager notificationManager=(NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);

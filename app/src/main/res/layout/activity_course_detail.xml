@@ -8,10 +8,11 @@
 
     <ScrollView
         android:layout_width="409dp"
-        android:layout_height="200dp"
+        android:layout_height="250dp"
         tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="1dp"
         android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         >
 
         <LinearLayout
@@ -138,6 +139,22 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:hint="123@instructor.edu" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Course Notes: "></TextView>
+
+                <EditText
+                    android:id="@+id/editCourseNotes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
             </LinearLayout>
 
         </LinearLayout>

@@ -44,9 +44,9 @@ public class Repository {
         return (ArrayList<Term>) mAllTerms;
     }
 
-    public ArrayList<Course>getAllCourses(int termID){
+    public ArrayList<Course>getCoursesFromTerm(int termID){
         dbExecutor.execute(()->{
-            mAllCourses=mCourseDAO.getAllCourses(termID);
+            mAllCourses=mCourseDAO.getCoursesFromTerm(termID);
         });
 
         try{
@@ -57,9 +57,34 @@ public class Repository {
         return (ArrayList<Course>) mAllCourses;
     }
 
-    public ArrayList<Assessment>getAllAssessments(int courseID){
+    public ArrayList<Course>getAllCourses(){
         dbExecutor.execute(()->{
-            mAllAssessments = mAssessmentDAO.getAllAssessments(courseID);
+            mAllCourses=mCourseDAO.getAllCourses();
+        });
+
+        try{
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return (ArrayList<Course>) mAllCourses;
+    }
+
+    public ArrayList<Assessment>getAllAssessments(){
+        dbExecutor.execute(()->{
+            mAllAssessments = mAssessmentDAO.getAllAssessments();
+        });
+
+        try{
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return (ArrayList<Assessment>) mAllAssessments;
+    }
+    public ArrayList<Assessment>getAssessmentsFromCourse(int courseID){
+        dbExecutor.execute(()->{
+            mAllAssessments = mAssessmentDAO.getAssessmentsFromCourse(courseID);
         });
 
         try{
@@ -150,6 +175,17 @@ public class Repository {
     public void deleteCourse(Course course){
         dbExecutor.execute(()->{
             mCourseDAO.delete(course);
+        });
+        try{
+            Thread.sleep(1000);
+        } catch (InterruptedException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteAssessment(Assessment assessment){
+        dbExecutor.execute(()->{
+            mAssessmentDAO.delete(assessment);
         });
         try{
             Thread.sleep(1000);

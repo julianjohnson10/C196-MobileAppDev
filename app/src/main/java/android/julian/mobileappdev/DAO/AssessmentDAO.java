@@ -1,6 +1,7 @@
 package android.julian.mobileappdev.DAO;
 
 import android.julian.mobileappdev.Entity.Assessment;
+import android.julian.mobileappdev.Entity.Course;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
@@ -23,5 +24,8 @@ public interface AssessmentDAO {
     void delete(Assessment assessment);
 
     @Query("SELECT * FROM assessments WHERE courseID = :courseID")
-    List<Assessment> getAllAssessments(int courseID);
+    List<Assessment> getAssessmentsFromCourse(int courseID);
+
+    @Query("SELECT * FROM assessments ORDER BY assessmentID ASC")
+    List<Assessment> getAllAssessments();
 }

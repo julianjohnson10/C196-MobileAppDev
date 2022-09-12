@@ -3,6 +3,7 @@ package android.julian.mobileappdev.UI;
 import android.content.Intent;
 import android.julian.mobileappdev.Database.Repository;
 import android.julian.mobileappdev.Entity.Course;
+import android.julian.mobileappdev.Entity.Term;
 import android.julian.mobileappdev.R;
 import android.os.Bundle;
 import android.view.Menu;
@@ -27,7 +28,7 @@ public class CourseList extends AppCompatActivity {
         TextView emptyView = findViewById(R.id.empty_view);
 
         Repository repository=new Repository(getApplication());
-        ArrayList<Course> courses= repository.getAllCourses(TermDetails.termID);
+        ArrayList<Course> courses= repository.getCoursesFromTerm(TermDetails.termID);
         final CourseAdapter courseAdapter=new CourseAdapter(this, courses);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(courseAdapter);
@@ -50,12 +51,12 @@ public class CourseList extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         setContentView(R.layout.activity_course_list);
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         RecyclerView recyclerView = findViewById(R.id.courseRV);
         TextView emptyView = findViewById(R.id.empty_view);
 
         Repository repository = new Repository(getApplication());
-        ArrayList<Course> courses = repository.getAllCourses(TermDetails.termID);
+        ArrayList<Course> courses = repository.getCoursesFromTerm(TermDetails.termID);
         final CourseAdapter courseAdapter = new CourseAdapter(this, courses);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(courseAdapter);
@@ -68,12 +69,10 @@ public class CourseList extends AppCompatActivity {
             recyclerView.setVisibility(View.VISIBLE);
             emptyView.setVisibility(View.GONE);
         }
-
-
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_courselist, menu);
+        getMenuInflater().inflate(R.menu.baseline, menu);
         return true;
     }
 

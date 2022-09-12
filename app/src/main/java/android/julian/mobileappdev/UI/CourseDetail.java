@@ -1,8 +1,13 @@
 package android.julian.mobileappdev.UI;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlarmManager;
 import android.app.DatePickerDialog;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.julian.mobileappdev.Database.Repository;
 import android.julian.mobileappdev.Entity.Course;
@@ -26,9 +31,11 @@ public class CourseDetail extends AppCompatActivity {
     EditText editCourseTitle;
     EditText editCourseStart;
     EditText editCourseEnd;
+    Spinner editCourseStatus;
     EditText editInstructorName;
     EditText editInstructorPhone;
     EditText editInstructorEmail;
+    EditText editCourseNotes;
     public static int courseID;
     Repository repository;
     String courseTitle;
@@ -41,11 +48,12 @@ public class CourseDetail extends AppCompatActivity {
     final Calendar calendarEnd = Calendar.getInstance();
     String format;
     SimpleDateFormat dateFormat;
+    String courseStatus;
     String courseInstructor;
     String courseInstructorPhone;
     String courseInstructorEmail;
-    Spinner editCourseStatus;
-    String courseStatus;
+
+    String courseNotes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +61,7 @@ public class CourseDetail extends AppCompatActivity {
         setContentView(R.layout.activity_course_detail);
         editCourseTitle=findViewById(R.id.editCourseTitle);
         editCourseStart=findViewById(R.id.editCourseStart);
+        editCourseNotes = findViewById(R.id.editCourseNotes);
         editCourseEnd=findViewById(R.id.editCourseEnd);
         editCourseStatus=findViewById(R.id.editCourseStatus);
         editInstructorName=findViewById(R.id.editInstructorName);
@@ -61,12 +70,14 @@ public class CourseDetail extends AppCompatActivity {
         courseID = getIntent().getIntExtra("course_id", -1);
         courseTitle = getIntent().getStringExtra("course_title");
         courseStart = getIntent().getStringExtra("course_start");
+        courseNotes = getIntent().getStringExtra("course_notes");
         courseStatus = getIntent().getStringExtra("course_status");
         courseEnd = getIntent().getStringExtra("course_end");
         courseInstructor = getIntent().getStringExtra("course_instructor_name");
         courseInstructorPhone = getIntent().getStringExtra("course_instructor_phone");
         courseInstructorEmail = getIntent().getStringExtra("course_instructor_email");
         editCourseTitle.setText(courseTitle);
+        editCourseNotes.setText(courseNotes);
 
         editCourseStart.setText(courseStart);
         editCourseEnd.setText(courseEnd);
@@ -76,7 +87,7 @@ public class CourseDetail extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         repository = new Repository(getApplication());
         ArrayList<Course> courses;
-        courses = repository.getAllCourses(termID);
+        courses = repository.getAllCourses();
         final CourseAdapter courseAdapter = new CourseAdapter(this,courses);
         courseAdapter.setCourses(courses);
 
@@ -146,10 +157,14 @@ public class CourseDetail extends AppCompatActivity {
 
         if (courseID == -1) {
             int id = repository.getAllTerms().get(repository.getAllTerms().size() -1).getTermID() + 1;
-            course = new Course(id, editCourseTitle.getText().toString(), editCourseStart.getText().toString(), editCourseEnd.getText().toString(),editCourseStatus.getSelectedItem().toString(), editInstructorName.getText().toString(),editInstructorPhone.getText().toString(),editInstructorEmail.getText().toString(), termID);
+            course = new Course(id, editCourseTitle.getText().toString(), editCourseStart.getText().toString(), editCourseEnd.getText().toString(),editCourseStatus.getSelectedItem().toString(), editInstructorName.getText().toString(),editInstructorPhone.getText().toString(),editInstructorEmail.getText().toString(), editCourseNotes.getText().toString(),TermDetails.termID);
             repository.insertCourse(course);
         } else {
-            course = new Course(courseID, editCourseTitle.getText().toString(), editCourseStart.getText().toString(), editCourseEnd.getText().toString(),editCourseStatus.getSelectedItem().toString(), editInstructorName.getText().toString(),editInstructorPhone.getText().toString(),editInstructorEmail.getText().toString(), termID);
+            course = new Course(courseID, editCourseTitle.getText().toString(), editCourseStart.getText().toString(), editCourseEnd.getText()
+                    .toString(),editCourseStatus.getSelectedItem()
+                    .toString(), editInstructorName.getText()
+                    .toString(),editInstructorPhone.getText().toString(),editInstructorEmail.getText()
+                    .toString(), editCourseNotes.getText().toString(),TermDetails.termID);
             repository.updateCourse(course);
         }
         finish();
@@ -161,9 +176,76 @@ public class CourseDetail extends AppCompatActivity {
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
+        Course course;
         switch (item.getItemId()) {
+
             case android.R.id.home:
                 this.finish();
+                return true;
+            case R.id.shareNotes:
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_SEND);
+                intent.putExtra(Intent.EXTRA_TEXT, this.editCourseNotes.getText().toString());
+                intent.putExtra(Intent.EXTRA_TITLE, "Title");
+                intent.setType("text/plain");
+                Intent shareIntent = Intent.createChooser(intent, null);
+                startActivity(shareIntent);
+                return true;
+            case R.id.deleteCourse:
+                course = new Course(courseID, editCourseTitle.getText().toString(), editCourseStart.getText().toString(), editCourseEnd.getText()
+                        .toString(),editCourseStatus.getSelectedItem()
+                        .toString(), editInstructorName.getText()
+                        .toString(),editInstructorPhone.getText().toString(),editInstructorEmail.getText()
+                        .toString(), editCourseNotes.getText().toString(),TermDetails.termID);
+                AlertDialog.Builder builder = new AlertDialog.Builder(CourseDetail.this);
+                builder.setTitle("Are you sure?");
+                builder.setMessage("Are you sure you want to delete " + editCourseTitle.getText().toString() +"?");
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        repository.deleteCourse(course);
+                        finish();
+                    }
+                });
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                });
+                builder.show();
+                return true;
+            case R.id.notifyCourse:
+                String datePicked = editCourseStart.getText().toString();
+                String datePicked2 = editCourseEnd.getText().toString();
+                Date date = null;
+                Date date2 = null;
+                try {
+                    date = dateFormat.parse(datePicked);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    date2 = dateFormat.parse(datePicked2);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                Long trigger = date.getTime();
+                Long trigger2 = date2.getTime();
+
+                Intent intent1 = new Intent(CourseDetail.this, Receiver.class);
+                Intent intent2 = new Intent(CourseDetail.this, Receiver.class);
+                intent1.putExtra("key","Your " + editCourseTitle.getText().toString() + " course starts today!");
+                intent2.putExtra("key","Your " + editCourseTitle.getText().toString() + " course ends today!");
+
+                PendingIntent sender = PendingIntent.getBroadcast(CourseDetail.this,MainActivity.numAlert++, intent1,0);
+                PendingIntent sender2 = PendingIntent.getBroadcast(CourseDetail.this,MainActivity.numAlert++, intent2,0);
+
+                AlarmManager manager=(AlarmManager) getSystemService(Context.ALARM_SERVICE);
+                AlarmManager manager2=(AlarmManager) getSystemService(Context.ALARM_SERVICE);
+                manager.set(AlarmManager.RTC_WAKEUP,trigger,sender);
+                manager2.set(AlarmManager.RTC_WAKEUP,trigger2,sender2);
+
                 return true;
         }
         return super.onOptionsItemSelected(item);

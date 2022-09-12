@@ -12,6 +12,7 @@
         tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="1dp"
         android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         >
 
 
@@ -72,25 +73,6 @@
                     android:layout_height="wrap_content"
                     android:hint="MM-DD-YYYY"></EditText>
             </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Assessment Course ID: "></TextView>
-
-                <TextView
-                    android:id="@+id/editAssessmentCourseID"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    />
-            </LinearLayout>
-
-
         </LinearLayout>
 
 

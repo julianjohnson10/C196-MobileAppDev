@@ -30,11 +30,11 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this, TermList.class);
         startActivity(intent);
         Repository repo=new Repository(getApplication());
-        Term term = new Term(1,"Fall Term 2022", "08/10/2022","2/20/2022");
+        Term term = new Term(1,"Fall Term 2022", "08/10/22","02/20/22");
         repo.insertTerm(term);
-        Course c = new Course(1,"Intro to IT","08/10/2022", "09/20/2022", "In Progress", "Jerry Garcia","(844)-100-2222","jgarcia@school.edu",1);
+        Course c = new Course(1,"Intro to IT","08/10/22", "09/20/22", "In Progress", "Jerry Garcia","(844)-100-2222","jgarcia@school.edu","Here are my class notes.",1);
         repo.insertCourse(c);
-        Assessment a = new Assessment(1,"Performance Assessment","IT Fundamentals Test", "9/20/2022", 1);
+        Assessment a = new Assessment(1,"Performance Assessment","IT Fundamentals Test", "09/20/22", 1);
         repo.insertAssessment(a);
     }
 }

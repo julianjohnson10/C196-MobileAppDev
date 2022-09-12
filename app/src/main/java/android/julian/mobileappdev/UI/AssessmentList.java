@@ -3,6 +3,7 @@ package android.julian.mobileappdev.UI;
 import android.content.Intent;
 import android.julian.mobileappdev.Database.Repository;
 import android.julian.mobileappdev.Entity.Assessment;
+import android.julian.mobileappdev.Entity.Term;
 import android.julian.mobileappdev.R;
 import android.os.Bundle;
 import android.view.Menu;
@@ -30,7 +31,7 @@ public class AssessmentList extends AppCompatActivity {
         courseID = getIntent().getIntExtra("course_id", -1);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Repository repository=new Repository(getApplication());
-        ArrayList<Assessment> assessments = repository.getAllAssessments(CourseDetail.courseID);
+        ArrayList<Assessment> assessments = repository.getAssessmentsFromCourse(CourseDetail.courseID);
         final AssessmentAdapter assessmentAdapter = new AssessmentAdapter(this, assessments);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(assessmentAdapter);
@@ -56,7 +57,7 @@ public class AssessmentList extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         courseID = getIntent().getIntExtra("course_id", -1);
         Repository repository=new Repository(getApplication());
-        ArrayList<Assessment> assessments = repository.getAllAssessments(CourseDetail.courseID);
+        ArrayList<Assessment> assessments = repository.getAssessmentsFromCourse(CourseDetail.courseID);
         final AssessmentAdapter assessmentAdapter = new AssessmentAdapter(this, assessments);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(assessmentAdapter);
@@ -74,7 +75,7 @@ public class AssessmentList extends AppCompatActivity {
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_courselist, menu);
+        getMenuInflater().inflate(R.menu.baseline, menu);
         return true;
     }
 

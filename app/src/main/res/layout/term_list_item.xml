@@ -9,15 +9,15 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
-        android:layout_width="326dp"
+        android:layout_width="300dp"
         android:layout_height="62dp"
         android:clickable="true"
         android:foreground="?android:attr/selectableItemBackground"
         app:cardBackgroundColor="@color/cardview_dark_background"
         app:cardCornerRadius="10dp"
         app:cardElevation="5dp"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="7dp">
+        tools:layout_editor_absoluteX="55dp"
+        tools:layout_editor_absoluteY="9dp">
 
         <TextView
             android:id="@+id/termName"
